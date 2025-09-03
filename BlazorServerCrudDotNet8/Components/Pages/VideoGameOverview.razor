@@ -1,0 +1,12 @@
+﻿@page "/games"
+@inject IVideoGameService _service;
+<h3>VideoGameOverview</h3>
+
+@code {
+    List<VideoGame> videoGames = new List<VideoGame>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        videoGames = await _service.GetAllVideoGamesAsync();
+    }
+}
