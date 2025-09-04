@@ -12,7 +12,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDbContext<DataContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IVideoGameService, IVideoGameService>();
+builder.Services.AddScoped<IVideoGameService, VedioGameService>();
 
 var app = builder.Build();
 

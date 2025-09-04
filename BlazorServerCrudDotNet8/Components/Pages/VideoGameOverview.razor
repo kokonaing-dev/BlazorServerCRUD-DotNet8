@@ -2,6 +2,37 @@
 @inject IVideoGameService _service;
 <h3>VideoGameOverview</h3>
 
+<PageTitle>Video Games</PageTitle>
+@if (!videoGames.Any())
+{
+    <p><em>Loading Video Games...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Title</td>
+                <td>Pbulisher</td>
+                <td>Release Year</td>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var game in videoGames)
+            {
+                <tr>
+                    <td>@game.Title</td>
+                    <td>@game.Publisher</td>
+                    <td>@game.ReleaseYear</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+
 @code {
     List<VideoGame> videoGames = new List<VideoGame>();
 
