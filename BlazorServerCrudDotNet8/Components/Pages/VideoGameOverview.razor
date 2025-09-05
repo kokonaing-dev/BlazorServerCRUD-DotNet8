@@ -1,9 +1,11 @@
 ﻿@page "/games"
-@inject IVideoGameService _service;
+@inject IVideoGameService VedioGameService
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+
 <h3>VideoGameOverview</h3>
 
 <PageTitle>Video Games</PageTitle>
-@if (!videoGames.Any())
+@if (videoGames.Count == 0)
 {
     <p><em>Loading Video Games...</em></p>
 }
@@ -38,6 +40,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        videoGames = await _service.GetAllVideoGamesAsync();
+        await Task.Delay(500);
+
+        videoGames = await VedioGameService.GetAllVideoGamesAsync();
     }
 }
