@@ -1,5 +1,6 @@
 ﻿@page "/games"
 @inject IVideoGameService VedioGameService
+@inject NavigationManager NavigationManager
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 
 <h3>VideoGameOverview</h3>
@@ -14,9 +15,11 @@ else
     <table class="table">
         <thead>
             <tr>
-                <td>Title</td>
-                <td>Pbulisher</td>
-                <td>Release Year</td>
+                <th>Title</th>
+                <th>Pbulisher</th>
+                <th>Release Year</th>
+                <th></th>
+                <th></th>
             </tr>
 
         </thead>
@@ -27,11 +30,15 @@ else
                     <td>@game.Title</td>
                     <td>@game.Publisher</td>
                     <td>@game.ReleaseYear</td>
+                    <td><button class="btn btn-primary" @onclick="@(()=> EditGame(game.Id))">Edit</button></td>
+                    <td><button class="btn btn-danger" @onclick="@(()=> DeleteGame(game.Id))">Delete</button></td>
                 </tr>
 
             }
         </tbody>
     </table>
+
+    <button class="btn btn-primary" @onclick="@(()=> AddGame())">Add New Game</button>
 }
 
 
@@ -43,5 +50,21 @@ else
         await Task.Delay(500);
 
         videoGames = await VedioGameService.GetAllVideoGamesAsync();
+    }
+
+    void EditGame(int id)
+    {
+        NavigationManager.NavigateTo($"/edit-game/{id}");
+    }
+
+    async Task DeleteGame(int id)
+    {
+        await VedioGameService.DeleteGameAsync(id);
+        videoGames = await VedioGameService.GetAllVideoGamesAsync();
+    }
+
+    void AddGame()
+    {
+        NavigationManager.NavigateTo("/edit-game");
     }
 }
