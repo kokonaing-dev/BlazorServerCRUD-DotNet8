@@ -21,4 +21,5 @@ public class DataContext : DbContext
     }
 
     public DbSet<VideoGame> VideoGames { get; set; }
+    public DbSet<Menu> Menus { get; set; }
 }

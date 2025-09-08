@@ -13,6 +13,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IVideoGameService, VedioGameService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
 
 var app = builder.Build();
 
